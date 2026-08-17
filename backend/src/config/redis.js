@@ -103,6 +103,15 @@ const redisWrapper = {
   },
   isNativeConnected() {
     return isConnected;
+  },
+  async disconnect() {
+    if (client) {
+      try {
+        await client.quit();
+      } catch (e) {
+        client.disconnect();
+      }
+    }
   }
 };
 

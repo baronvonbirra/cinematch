@@ -1,6 +1,12 @@
 const test = require('node:test');
+const { after } = require('node:test');
 const assert = require('node:assert');
 const app = require('../src/index');
+const redis = require('../src/config/redis');
+
+after(async () => {
+  await redis.disconnect();
+});
 
 test('GET /health returns 200 OK', async () => {
   const server = app.listen(0);
